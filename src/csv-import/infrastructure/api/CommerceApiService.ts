@@ -34,8 +34,8 @@ export class CommerceApiService implements CommerceApi {
     return response.json();
   }
 
-  async getQuarantineByDate(pcProcessdate: string): Promise<QuarantineRowResponse[]> {
-    const response = await fetch(`${apiConfig.baseUrl}${apiConfig.endpoints.quarantine}?pcProcessdate=${encodeURIComponent(pcProcessdate)}`);
+  async getQuarantineAll(): Promise<QuarantineRowResponse[]> {
+    const response = await fetch(`${apiConfig.baseUrl}${apiConfig.endpoints.quarantine}`);
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);

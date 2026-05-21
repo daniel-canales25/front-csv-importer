@@ -18,12 +18,14 @@ export type ValidateCommerceResponseDto = {
 };
 
 export type QuarantineRowDto = {
-  pc_nomcomred: string;
-  pc_numdoc: string;
-  pc_processdate: string;
-  motivo: string;
-};
-
-export type GetQuarantineDto = {
+  id: number;
+  pcNomcomred: string | null;
+  pcNumdoc: string;
   pcProcessdate: string;
+  categoria: string;
+  marca: string;
+  precio: string;
+  stock: number;
+  fechaVencimiento: string;
+  motivo: string;
 };

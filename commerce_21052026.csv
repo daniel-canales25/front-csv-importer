@@ -1,0 +1,21 @@
+pc_nomcomred,pc_numdoc,pc_processdate,categoria,marca,precio,stock,fecha_vencimiento
+Farmacia Salud,12345678,2026-05-21,Analgésico,Genérico,5.99,150,2025-12-31
+Farmacia Central,87654321,2026-05-21,Antiinflamatorio,Genérico,7.50,200,2025-10-15
+Farmacia Norte,11223344,2026-05-21,Antibiótico,Genérico,12.30,80,2025-08-20
+Farmacia Sur,55667788,2026-05-21,Antiacídico,Genérico,8.25,120,2026-01-10
+Farmacia Este,99887766,2026-05-21,Antihistamínico,Clarityne,9.90,95,2025-11-05
+Farmacia Oeste,33445566,2026-05-21,Respiratorio,Ventolin,22.50,45,2025-09-30
+Farmacia Bella Vista,22334455,2026-05-21,Antidiabético,Lantus,45.00,30,2026-02-28
+Farmacia Los Olivos,66778899,2026-05-21,Suplemento,Cerola,10.99,300,2026-03-01
+,77889900,2026-05-21,Antiinflamatorio,Voltaren,11.75,110,2025-07-22
+Farmacia San Isidro,abc12345,2026-05-21,Antihipertensivo,Genérico,14.20,75,2025-12-12
+Farmacia Miraflores,99001122,2026-05-21,Antibiótico,Zitromax,18.90,60,2025-06-18
+Farmacia Barranco,44556677,2026-05-21,Antifúngico,Genérico,6.50,140,2026-04-05
+,11335577,2026-05-21,Antihipertensivo,Genérico,9.30,90,2025-11-20
+Farmacia Pueblo Libre,abcd!xyz,2026-05-21,Opioide,Genérico,19.99,40,2025-08-14
+Farmacia Magdalena,24681357,2026-05-21,Antidiabético,Genérico,7.80,200,2026-01-25
+Farmacia San Miguel,13579246,2026-05-21,Insumo,BD,0.25,500,N/A
+Farmacia Jesús María,86420975,2026-05-21,Antiséptico,Genérico,3.45,180,2026-05-10
+Farmacia Lince,75395128,2026-05-21,Curación,Genérico,2.50,250,N/A
+Farmacia La Victoria,11235813,2026-05-21,Dispositivo,Omron,15.99,35,N/A
+Farmacia Breña,31415926,2026-05-21,Antiacídico,Genérico,11.50,85,2026-02-01

@@ -1,0 +1,21 @@
+product_id,product_name,category,brand,price,stock_quantity,expiration_date,pc_processdate
+FAR001,Paracetamol 500mg,Analgésico,Genérico,5.99,150,2025-12-31,2025-03-15
+FAR002,Ibuprofeno 400mg,Antiinflamatorio,Genérico,7.50,200,2025-10-15,2025-03-15
+FAR003,Amoxicilina 500mg,Antibiótico,Genérico,12.30,80,2025-08-20,2025-03-15
+FAR004,Omeprazol 20mg,Antiacídico,Genérico,8.25,120,2026-01-10,2025-03-15
+FAR005,Loratadina 10mg,Antihistamínico,Clarityne,9.90,95,2025-11-05,2025-03-15
+FAR006,Salbutamol Inhalador,Respiratorio,Ventolin,22.50,45,2025-09-30,2025-03-15
+FAR007,Insulina Glargina,Antidiabético,Lantus,45.00,30,2026-02-28,2025-03-15
+FAR008,Vitamina C 1000mg,Suplemento,Cerola,10.99,300,2026-03-01,2025-03-15
+FAR009,Diclofenaco 50mg,Antiinflamatorio,Voltaren,11.75,110,2025-07-22,2025-03-15
+FAR010,Losartán 50mg,Antihipertensivo,Genérico,14.20,75,2025-12-12,2025-03-15
+FAR011,Azitromicina 500mg,Antibiótico,Zitromax,18.90,60,2025-06-18,2025-03-15
+FAR012,Miconazol Crema,Antifúngico,Genérico,6.50,140,2026-04-05,2025-03-15
+FAR013,Enalapril 10mg,Antihipertensivo,Genérico,9.30,90,2025-11-20,2025-03-15
+FAR014,Tramadol 50mg,Opioide,Genérico,19.99,40,2025-08-14,2025-03-15
+FAR015,Metformina 850mg,Antidiabético,Genérico,7.80,200,2026-01-25,2025-03-15
+FAR016,Jeringas 1ml,Insumo,BD,0.25,500,N/A,2025-03-15
+FAR017,Alcohol 70%,Antiséptico,Genérico,3.45,180,2026-05-10,2025-03-15
+FAR018,Curitas 20u,Curación,Genérico,2.50,250,N/A,2025-03-15
+FAR019,Termómetro Digital,Dispositivo,Omron,15.99,35,N/A,2025-03-15
+FAR020,Omeprazol 40mg,Antiacídico,Genérico,11.50,85,2026-02-01,2025-03-15

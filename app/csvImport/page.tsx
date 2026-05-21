@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import Papa from "papaparse";
 import { CommerceApiService } from "@/src/csv-import/infrastructure/api/CommerceApiService";
 import { CommerceRowValidatorImpl } from "@/src/csv-import/infrastructure/validators/CommerceRowValidatorImpl";
@@ -96,6 +96,7 @@ export default function CsvImport() {
     try {
       await api.uploadCsv(file);
       setUploaded(true);
+      setActiveTab("process");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Upload failed");
     } finally {
@@ -121,7 +122,7 @@ export default function CsvImport() {
       setProcessedDates((prev) => [...prev, newProcessed]);
       setProcessingDate(null);
       if (newProcessed.insertedInQuarantine > 0) {
-        loadQuarantine(true);
+        loadQuarantine();
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Validation failed");
@@ -152,17 +153,16 @@ export default function CsvImport() {
     setValidating(false);
     const anyQuarantine = acc.some((p) => p.insertedInQuarantine > 0);
     setActiveTab("errors");
-    loadQuarantine(anyQuarantine);
+    loadQuarantine();
   }
 
   async function goToErrors() {
     setActiveTab("errors");
     const anyQuarantine = processedDates.some((p) => p.insertedInQuarantine > 0);
-    loadQuarantine(anyQuarantine);
+    loadQuarantine();
   }
 
-  async function loadQuarantine(hasErrors: boolean) {
-    if (!hasErrors) return;
+  async function loadQuarantine() {
     setLoadingQuarantine(true);
     try {
       const result = await getQuarantineAction();
@@ -175,6 +175,12 @@ export default function CsvImport() {
       setLoadingQuarantine(false);
     }
   }
+
+  useEffect(() => {
+    if (activeTab === "errors") {
+      loadQuarantine();
+    }
+  }, [activeTab]);
 
   function handleReset() {
     setFile(null);
@@ -466,7 +472,7 @@ export default function CsvImport() {
                   {quarantineRows.length > 0 && `${quarantineRows.length} registro(s) en cuarentena`}
                 </p>
                 <button
-                  onClick={() => loadQuarantine(true)}
+                  onClick={() => loadQuarantine()}
                   className="text-sm text-blue-600 hover:text-blue-800 font-medium"
                 >
                   Recargar

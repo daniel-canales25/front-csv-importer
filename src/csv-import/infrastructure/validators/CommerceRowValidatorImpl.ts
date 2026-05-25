@@ -1,30 +1,20 @@
-import { CommerceRowValidator, CommerceRow, RowValidationError } from "@/src/csv-import/application/validators/CommerceRowValidator";
+import { CommerceRowValidator } from "@/src/csv-import/domain/ports/CommerceRowValidator";
+import { CommercePrimitive, RowValidationError, Commerce } from "@/src/csv-import/domain/entities/Commerce";
 
 export class CommerceRowValidatorImpl implements CommerceRowValidator {
-  validate(row: CommerceRow, rowIndex: number): RowValidationError[] {
+  validate(row: CommercePrimitive, rowIndex: number): RowValidationError[] {
     const errors: RowValidationError[] = [];
     const rowNumber = rowIndex + 1;
 
-    if (!row.pc_nomcomred || row.pc_nomcomred.trim() === "") {
-      errors.push({
-        row: rowNumber,
-        field: "pc_nomcomred",
-        message: "pc_nomcomred vacío",
-      });
-    }
-
-    if (!row.pc_numdoc || row.pc_numdoc.trim() === "") {
-      errors.push({
-        row: rowNumber,
-        field: "pc_numdoc",
-        message: "pc_numdoc vacío",
-      });
-    } else if (!/^\d+$/.test(row.pc_numdoc.trim())) {
-      errors.push({
-        row: rowNumber,
-        field: "pc_numdoc",
-        message: "pc_numdoc contiene letras o caracteres especiales",
-      });
+    const result = Commerce.tryCreate(row);
+    if (result.errors) {
+      for (const err of result.errors) {
+        errors.push({
+          row: rowNumber,
+          field: err.field,
+          message: err.message,
+        });
+      }
     }
 
     return errors;

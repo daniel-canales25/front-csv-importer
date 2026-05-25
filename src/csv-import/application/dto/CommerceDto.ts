@@ -1,14 +1,5 @@
-export type UploadCommerceDto = {
-  file: File;
-};
-
 export type ValidateCommerceDto = {
   pcProcessdate: string;
-};
-
-export type UploadCommerceResponseDto = {
-  success: boolean;
-  message: string;
 };
 
 export type ValidateCommerceResponseDto = {

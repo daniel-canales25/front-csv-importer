@@ -2,10 +2,10 @@
 
 import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import Papa from "papaparse";
-import { CommerceApiService } from "@/src/csv-import/infrastructure/api/CommerceApiService";
-import { CommerceRowValidatorImpl } from "@/src/csv-import/infrastructure/validators/CommerceRowValidatorImpl";
+import { api, validator } from "@/src/csv-import/composition";
 import { validateCommerceAction, getQuarantineAction } from "@/src/csv-import/interfaces/http/actions/commerceActions";
-import type { CommerceRow, RowValidationError } from "@/src/csv-import/application/validators/CommerceRowValidator";
+import type { CommercePrimitive } from "@/src/csv-import/domain/entities/Commerce";
+import type { RowValidationError } from "@/src/csv-import/domain/entities/Commerce";
 import type { QuarantineRowDto } from "@/src/csv-import/application/dto/CommerceDto";
 
 type TabType = "upload" | "process" | "errors";
@@ -15,14 +15,11 @@ type ProcessedDate = {
   insertedInQuarantine: number;
 };
 
-const api = new CommerceApiService();
-const validator = new CommerceRowValidatorImpl();
-
 export default function CsvImport() {
   const [activeTab, setActiveTab] = useState<TabType>("upload");
   const [file, setFile] = useState<File | null>(null);
   const [headers, setHeaders] = useState<string[]>([]);
-  const [rows, setRows] = useState<CommerceRow[]>([]);
+  const [rows, setRows] = useState<CommercePrimitive[]>([]);
   const [rowErrors, setRowErrors] = useState<RowValidationError[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
@@ -53,7 +50,7 @@ export default function CsvImport() {
     const reader = new FileReader();
     reader.onload = (e) => {
       const content = e.target?.result as string;
-      const result = Papa.parse<CommerceRow>(content, {
+      const result = Papa.parse<CommercePrimitive>(content, {
         header: true,
         skipEmptyLines: true,
         dynamicTyping: false,
@@ -151,14 +148,12 @@ export default function CsvImport() {
     }
     setProcessedDates((prev) => [...prev, ...acc]);
     setValidating(false);
-    const anyQuarantine = acc.some((p) => p.insertedInQuarantine > 0);
     setActiveTab("errors");
     loadQuarantine();
   }
 
   async function goToErrors() {
     setActiveTab("errors");
-    const anyQuarantine = processedDates.some((p) => p.insertedInQuarantine > 0);
     loadQuarantine();
   }
 
@@ -203,7 +198,7 @@ export default function CsvImport() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen from-blue-50 to-indigo-100">
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold text-gray-900">
@@ -242,7 +237,6 @@ export default function CsvImport() {
         )}
 
         <div className="mt-8">
-          {/* Tab: Upload + Preview */}
           {activeTab === "upload" && (
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-xl font-semibold mb-4">Cargar archivo CSV</h2>
@@ -318,7 +312,7 @@ export default function CsvImport() {
                               <td className="border px-3 py-2 text-gray-500 text-xs">{i + 1}</td>
                               {headers.map((header) => (
                                 <td key={header} className="border px-3 py-2 text-gray-600">
-                                  {row[header as keyof CommerceRow] ?? ""}
+                                  {row[header as keyof CommercePrimitive] ?? ""}
                                 </td>
                               ))}
                             </tr>
@@ -332,7 +326,6 @@ export default function CsvImport() {
             </div>
           )}
 
-          {/* Tab: Process by date */}
           {activeTab === "process" && (
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-xl font-semibold mb-4">Procesar registros por fecha</h2>
@@ -450,7 +443,6 @@ export default function CsvImport() {
             </div>
           )}
 
-          {/* Tab: Errors / Quarantine */}
           {activeTab === "errors" && (
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-xl font-semibold mb-4">Registros en cuarentena</h2>
